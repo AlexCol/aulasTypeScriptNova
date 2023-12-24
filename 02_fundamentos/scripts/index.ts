@@ -14,3 +14,9 @@ console.log(meuNome);
 console.log(typeof(meuNome));
 
 let a: boolean = true;
+
+
+
+const ann:string = "teste";
+let inf = "teste";
+//inf = 1; //+dá erro
