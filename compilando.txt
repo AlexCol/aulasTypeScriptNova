@@ -5,7 +5,8 @@ tsc //somente tsc para que ele respeite os diretorios de origem e destino dos ar
 tsc -w //auto recompile, sempre que salvar o arquivo ts
 
 
-
+//para criar o arquivo de configuração
+tsc --init
 
 /*
 lib": ["DOM" --faz com que o sistema olhe outros arquivos ts e js para ver se tem variaveis com mesmo nome, e gera erro
