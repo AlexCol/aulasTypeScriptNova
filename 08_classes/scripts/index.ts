@@ -34,3 +34,257 @@ console.log(newUser);
 newUser.age = 40;
 console.log(newUser);
 //newUser.job = "programmer";
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Campo Readonly
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class Vehicle {
+    name: string
+    readonly wheels;
+
+    constructor(name: string, wheels: number) {
+        this.name = name;
+        this.wheels = wheels;
+    }
+}
+
+const fusca = new Vehicle("Fusca", 4);
+const moto = new Vehicle("Honda", 2);
+console.log(fusca);
+fusca.name = "mudei de nome";
+//fusca.wheels = 4; //não pode
+console.log(moto);
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Heracança e Super
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class Machine {
+    name
+    constructor(name: string) {
+        this.name = name;
+    }
+}
+const trator = new Machine("Trator");
+
+class KillerMachine extends Machine {
+    guns
+    constructor (name: string, guns: number) {
+        super(name);
+        this.guns = guns;
+    }
+}
+
+const myKillingMachine = new KillerMachine("Exterminator", 4);
+
+console.log(trator);
+console.log(myKillingMachine);
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Metodos
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class Dwarf {
+    name
+    constructor(name: string) {
+        this.name = name;
+    }
+    greeting() {
+        console.log(`Hey stranger!`);
+    }
+}
+const jimmy = new Dwarf("Jimmy");
+console.log(jimmy);
+jimmy.greeting();
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ O this em classes
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class Truck {
+    model
+    hp
+    constructor(model: string, hp: number) {
+        this.model = model;
+        this.hp = hp;
+    }
+    showDetails() {
+        console.log(`Caminhão modelo ${this.model}, que tem ${this.hp} cavalos de potencia.`);
+    }
+}
+
+const volvo = new Truck("Volvo", 400);
+const scania = new Truck("Scania", 550);
+
+volvo.showDetails();
+scania.showDetails();
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Getters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class Person {
+    private name
+    private surname
+    constructor(name:string, surname:string) {
+        this.name = name;
+        this.surname = surname;
+    }
+
+    get fullName() {
+        return `${this.name} ${this.surname}`;
+    }
+}
+
+const myPerson = new Person("Alexandre", "Coletti");
+console.log(myPerson.fullName);
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Setters
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class Coords {
+    private x!: number
+    private y!: number
+
+    set fillX(x: number) {
+        this.x = x;
+        console.log("X inserido com sucesso");
+    }
+    set fillY(y: number) {
+        if (y === 0) {
+            return;
+        }
+        this.y = y;
+        console.log("Y inserido com sucesso");
+    }
+
+    get getCoords() {
+        return `X: ${this.x} e Y: ${this.y}`;
+    }
+}
+
+const myCoords = new Coords();
+console.log(myCoords);
+myCoords.fillX = 15;
+myCoords.fillY = 10;
+console.log(myCoords);
+console.log(myCoords.getCoords);
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Herdando interfaces
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+interface showTitle {
+    itemTitle(): string;
+}
+
+class blgPost implements showTitle {
+    title
+    constructor(title: string) {
+        this.title = title;
+    }
+    itemTitle(): string {
+        return `The title of the post is ${this.title}`;
+    }
+}
+
+class Movie implements showTitle {
+    title
+    constructor(title: string) {
+        this.title = title;
+    }
+    itemTitle(): string {
+        return `The title of the movie is ${this.title}`;
+    }
+}
+
+function ShowTitle(item:showTitle) {
+    console.log(item.itemTitle());
+}
+
+const newPost = new blgPost("Titulo do post");
+const newMovie = new Movie("Titulo do filme");
+ShowTitle(newPost);
+ShowTitle(newMovie);
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Override de Metodos
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class Base {
+    someMethod() {
+        console.log("alguma coisa");
+    }
+}
+
+class Nova extends Base {
+    someMethod() {
+        console.log("alguma coisa nova");
+    }
+}
+
+const myObject = new Nova();
+myObject.someMethod();
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Visibilidade Public
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class C {
+    public x = 10; //por default, se não informar a visibilidade, ela é publica
+}
+
+const cInstance = new C();
+console.log(cInstance.x);
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Visibilidade Protected
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class E {
+    protected x = 10;
+
+    protected ProtectedMethod() {
+        console.log("Este metodo é protegido.");
+    }
+}
+class F extends E {
+    showX() {
+        console.log(this.x);
+    }
+}
+const myE = new E();
+//myE.x;
+const myF = new F();
+//myF.x;
+myF.showX();
+
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Visibilidade Private
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class PrivateClass {
+    private _name = "Private";
+    set name(name: string) {
+        this._name = name;
+    }
+    get name():string {
+        return this._name;
+    }
+}
+const myPrivate = new PrivateClass();
+//console.log(myPrivate._name);
+console.log(myPrivate.name);
