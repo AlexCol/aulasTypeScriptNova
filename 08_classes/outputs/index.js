@@ -236,3 +236,149 @@ class PrivateClass {
 const myPrivate = new PrivateClass();
 //console.log(myPrivate._name);
 console.log(myPrivate.name);
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Static members
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class StaticMembers {
+    static sum(n1, n2) {
+        return n1 + n2;
+    }
+}
+StaticMembers.propridade = "Teste Estatico";
+console.log(StaticMembers.propridade);
+var staticSum = StaticMembers.sum(1, 5);
+console.log(staticSum);
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Gerenic Class
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class Item {
+    constructor(first, second) {
+        this.first = first;
+        this.second = second;
+    }
+    showFirst() {
+        return `${this.first} é o primeiro item.`;
+    }
+    showSecond() {
+        return `${this.second} é o segundo item.`;
+    }
+}
+var newItem = new Item("Item", "Surpresa");
+console.log(newItem);
+var newItem2 = new Item("Item", 2);
+console.log(newItem2);
+console.log(newItem2.showSecond());
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Param Properties
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class ParameterProperties {
+    //com isso posso criar a propriedade e setar sua visibilidade no proprio construtor
+    constructor(name, qtd, price) {
+        this.name = name;
+        this.qtd = qtd;
+        this.price = price;
+        this.name = name;
+        this.qtd = qtd;
+        this.price = price;
+    }
+    get Qtd() {
+        return this.qtd;
+    }
+    get Price() {
+        return this.price;
+    }
+}
+const newShirt = new ParameterProperties("Shirt", 1, 19.99);
+console.log(newShirt.name);
+//console.log(newShirt.qtd);
+console.log(newShirt.Qtd);
+console.log(newShirt.Price);
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Class Expression
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+//não se cria a classe 'diretamente', se cria uma variavel e cria uma classe generica e joga ela na variavel
+const myClass = class {
+    constructor(name) {
+        this.name = name;
+    }
+};
+const person = new myClass("Alex");
+console.log(person);
+console.log(person.name);
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Class Abstrata
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+class AbstractClass {
+}
+//const newObj = new AbstractClass();
+class AbstractExemple extends AbstractClass {
+    constructor(name) {
+        super();
+        this.name = name;
+    }
+    showName() {
+        console.log(`${this.name} é o nome informado.`);
+    }
+}
+class AbstractExemple2 extends AbstractClass {
+    constructor(name) {
+        super();
+        this.name = name;
+    }
+    showName() {
+        console.log(`${this.name} é o numero informado para o nome.`);
+    }
+}
+const exm1 = new AbstractExemple("Alex");
+const exm2 = new AbstractExemple2(38);
+function useAbstractClass(obj) {
+    obj.showName();
+}
+useAbstractClass(exm1);
+useAbstractClass(exm2);
+/*
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Relação entre classes
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+/*
+ ! type script não analisa o tipo da classe, por isso mesmo informando que precisa ser Dog na função
+ ! ele aceita cat. O typescript olha APENAS o que DOG tem, e qualquer classe com essas propriedades
+ ! é aceita. Como se fosse apenas uma interface.
+ ! no exemplo abaixo, coloquei uma trativa caso deseje apenas do tipo DOG
+*/
+class Dog {
+    constructor(name) {
+        this.name = name;
+    }
+}
+const doguinho = new Dog("Meu Dog");
+function showDogDetails(dog) {
+    /*
+    if (!(dog instanceof Dog)) {
+        console.log(`Animal informado não é um cachorro.`)
+        return;
+    }
+    */
+    console.log(`${dog.name} é o nome do meu dog.`);
+}
+showDogDetails(doguinho);
+class Cat {
+    constructor(name) {
+        this.name = name;
+    }
+}
+const mimi = new Cat("Mimi");
+showDogDetails(mimi);
+const meuDog2 = new Cat("Mimi2");
+console.log(meuDog2);
