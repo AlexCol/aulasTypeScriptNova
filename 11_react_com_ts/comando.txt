@@ -1,0 +1,7 @@
+criar projeto react com typescript:
+
+npx create-react-app 11_react_com_ts --template typescript
+
+
+  cd 11_react_com_ts
+  npm start
