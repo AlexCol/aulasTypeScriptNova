@@ -13,6 +13,10 @@
 //npm install @types/express @types/node ts-node-dev typescript --save-dev
 //npm install express
 
+//para uso do cors
+//npm install @types/cors
+//npm install cors
+
 
 //!criado no arquivo package.json, abaixo de test (com isso pode-se rodar a aplicação com 'npm run dev'):
 //"dev": "ts-node-dev --respawn --transpile-only src/app.ts"=
