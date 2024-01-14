@@ -1,0 +1,50 @@
+    //para iniciar o projeto
+npm init -y
+
+    //para iniciar o typescript
+tsc --init
+
+    //instalações de pacotes
+    //config: Este pacote permite que você mantenha configurações separadas para diferentes ambientes (desenvolvimento, produção, teste, etc.) e facilmente as acesse em seu aplicativo Node.js.
+    //dotenv: Este pacote carrega variáveis de ambiente de um arquivo chamado .env para o processo.env. Isso é útil para configurar senhas, chaves de API e outras configurações sensíveis de maneira segura.
+    //express: É um framework web para Node.js que facilita a construção de aplicativos web robustos e escaláveis.
+    //express-validator: Fornece funções para validar e sanitizar dados de entrada no Express. É útil para garantir que os dados recebidos pelo seu aplicativo estejam no formato desejado.
+    //mongoose: É uma biblioteca do Node.js que fornece uma camada de modelagem para interagir com bancos de dados MongoDB. Facilita a definição de esquemas, validação de dados e interações com o banco de dados.
+    //morgan: É um middleware para o Express que gera logs de solicitação HTTP. Isso é útil para rastrear as solicitações que seu servidor recebe.
+    //winston: É um módulo de registro (logging) para Node.js. Ele fornece uma estrutura flexível para o registro de mensagens de registro em diferentes níveis, permitindo a personalização da forma como as mensagens de log são tratadas.
+npm install config dotenv express express-validator mongoose morgan winston
+
+
+    //@types/config: Este pacote fornece declarações de tipos TypeScript para o pacote config, permitindo que o TypeScript entenda e forneça informações sobre as estruturas e funções definidas por esse pacote.
+    //@types/express: Fornece declarações de tipos para o framework Express. Isso é útil ao desenvolver em TypeScript, pois permite que o TypeScript compreenda a estrutura do Express e forneça sugestões e verificação de tipos durante o desenvolvimento.
+    //@types/mongoose: Oferece declarações de tipos para o pacote Mongoose, que é usado para interagir com bancos de dados MongoDB. Isso ajuda o TypeScript a entender a estrutura do Mongoose e fornece verificação de tipos ao desenvolver com Mongoose.
+    //@types/morgan: Fornece declarações de tipos para o pacote morgan, um middleware de logging para Express. Isso permite que o TypeScript compreenda a API do morgan e forneça suporte à verificação de tipos.
+    //@types/node: Declarações de tipos para o Node.js. Isso é essencial para projetos TypeScript que utilizam o Node.js, pois fornece informações de tipo para as APIs do Node.js.///ts-node-dev: É uma ferramenta de desenvolvimento que permite a execução direta de arquivos TypeScript no Node.js, reiniciando automaticamente o aplicativo quando há alterações no código-fonte. É útil durante o desenvolvimento, proporcionando uma experiência de desenvolvimento mais eficiente.
+    //typescript: O compilador TypeScript, que converte código TypeScript em JavaScript. Ele também é usado para verificar tipos durante o desenvolvimento.
+    //O parâmetro --save-dev indica que essas dependências devem ser listadas no arquivo devDependencies no arquivo package.json. Isso significa que essas dependências são necessárias apenas durante o desenvolvimento e não são necessárias para a execução do aplicativo em produção.
+npm install @types/config @types/express @types/mongoose @types/morgan @types/node ts-node-dev typescript --save-dev
+
+    //para desenvolvimento, usar hot reload
+    //--respawn: Reinicia o aplicativo quando os arquivos são alterados.
+    //--transpile-only: Apenas realiza a transpilação TypeScript sem verificar tipos. Isso torna o processo mais rápido durante o desenvolvimento.
+
+    //adicione um script ao seu arquivo package.json para iniciar o servidor com hot reload. Por exemplo:
+"scripts": {
+  "dev": "ts-node-dev --respawn --transpile-only src/App.ts"
+}
+
+    //'dev' ou o comando que definiu o nome antes dos dois pontos no comando acima
+    //então rodar 
+npm run dev
+
+
+    //adicionando arquivo de configurações (já que importado o pacote config)
+criada pasta config e arquivo default.ts
+para usar, importar a config:
+import config from "config";
+e buscar os dados: const minhaPorta = config.get<tipoDaVariavel>("nomeDaVariavel");
+
+    //ao se usar os comandos abaixo no App.ts, consegue-se ler as propriedades do arquivo '.env'
+    //configurado .env duas variaveis, e as usadas em default.ts
+import dotenv from 'dotenv';
+dotenv.config();
